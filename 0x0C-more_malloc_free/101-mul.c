@@ -32,6 +32,17 @@ void _is_zero(char *argv[])
 		printf("0\n");
 		exit(0);
 	}
+	{
+		if (result[i])
+			a = 1;
+		if (a)
+			_putchar(result[i] + '0');
+	}
+	if (!a)
+		_putchar('0');
+	_putchar('\n');
+	free(result);
+	return (0);
 }
 
 /**
