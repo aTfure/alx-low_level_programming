@@ -1,106 +1,99 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "main.h"
+
 /**
- * printError - prints "Error\n".
+ * is_digit - checks if a string contains a non-digit char
+ * @s: string to be evaluated
  *
- * Return: string.
+ * Return: 0 if a non-digit is found, 1 otherwise
  */
-void printError(void)
+int is_digit(char *s)
 {
-	int i;
-	char *e = "Error\n";
+	int i = 0;
 
-	for (i = 0; e[i]; i++)
-		_putchar(e[i]);
-	exit(98);
-}
-/**
- * allDigits - checks arguments are digits.
- * @arg: the arguments of program.
- * Return: 1 or 0.
- */
-int allDigits(char **arg)
-{
-	int i, j;
-
-	for (i = 1; i <= 2; i++)
-		for (j = 0; arg[i][j]; j++)
-		{
-			if (arg[i][j] < '0' || arg[i][j] > '9')
-				return (0);
-		}
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
 	return (1);
 }
+
 /**
- * _calloc- initializes memory spaces with zero.
- * @nmemb: string 1.
- * @size: string 2, concatenated to 1
+ * _strlen - returns the length of a string
+ * @s: string to evaluate
  *
- * Return: pointer to the concatenated string.
+ * Return: the length of the string
  */
-void *_calloc(unsigned int nmemb, unsigned int size)
+int _strlen(char *s)
 {
-	unsigned int i;
-	char *newArray;
+	int i = 0;
 
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-
-	newArray = malloc(nmemb * size);
-	if (newArray == NULL)
-		return (NULL);
-
-	for (i = 0; i < (nmemb * size); i++)
-		*(newArray + i) = 0;
-
-	return (newArray);
-}
-/**
- * main- multiplies 2 positive numbers.
- * @argc: counter of arguments.
- * @argv: vector of arguments
- * Return: ans or Error.
- */
-
-int main(int argc, char **argv)
-{
-	int i, j, carry, length, length_s1 = 0, length_s2 = 0;
-	char *s1 = *(argv + 1), *s2 = *(argv + 2);
-	int *a, *b, *ans;
-
-	if (argc != 3 || allDigits(argv) != 1)
-		printError();
-	if (*s1 == '0' || *s2 == '0')
-		_putchar('0');
-	while (*(*(argv + 1) + length_s1))
-		length_s1++;
-	while (*(*(argv + 2) + length_s2))
-		length_s2++;
-	length = length_s1 + length_s2 + 1;
-	a = (int *)malloc(length_s1 * sizeof(int));
-	b = (int *)malloc(length_s2 * sizeof(int));
-	ans = _calloc(length, sizeof(int));
-	if (a == NULL || b == NULL || ans == NULL)
-		printError();
-	for (i = length_s1 - 1, j = 0; i >= 0; i--, j++)
-		*(a + j) = *(s1 + i) - '0';
-	for (i = length_s2 - 1, j = 0; i >= 0; i--, j++)
-		*(b + j) = *(s2 + i) - '0';
-	for (i = 0; i < length_s2; i++)
-		for (j = 0; j < length_s1; j++)
-			*(ans + i + j) = *(ans + i + j) + *(b + i) * *(a + j);
-	for (i = 0; i < length_s1 + length_s2; i++)
+	while (s[i] != '\0')
 	{
-		carry = *(ans + i) / 10, *(ans + i) = *(ans + i) % 10;
-		*(ans + i + 1) = *(ans + i + 1) + carry;
+		i++;
 	}
-	for (i = length_s1 + length_s2; i >= 0; i--)
-		if (*(ans + i) > 0)
-			break;
-	for (; i >= 0; i--)
-		_putchar(*(ans + i) + '0');
+	return (i);
+}
+
+/**
+ * errors - handles errors for main
+ */
+void errors(void)
+{
+	printf("Error\n");
+	exit(98);
+}
+
+/**
+ * main - multiplies two positive numbers
+ * @argc: number of arguments
+ * @argv: array of arguments
+ *
+ * Return: always 0 (Success)
+ */
+int main(int argc, char *argv[])
+{
+	char *s1, *s2;
+	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
+
+	s1 = argv[1], s2 = argv[2];
+	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
+		errors();
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+	len = len1 + len2 + 1;
+	result = malloc(sizeof(int) * len);
+	if (!result)
+		return (1);
+	for (i = 0; i <= len1 + len2; i++)
+		result[i] = 0;
+	for (len1 = len1 - 1; len1 >= 0; len1--)
+	{
+		digit1 = s1[len1] - '0';
+		carry = 0;
+		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
+		{
+			digit2 = s2[len2] - '0';
+			carry += result[len1 + len2 + 1] + (digit1 * digit2);
+			result[len1 + len2 + 1] = carry % 10;
+			carry /= 10;
+		}
+		if (carry > 0)
+			result[len1 + len2 + 1] += carry;
+	}
+	for (i = 0; i < len - 1; i++)
+	{
+		if (result[i])
+			a = 1;
+		if (a)
+			_putchar(result[i] + '0');
+	}
+	if (!a)
+		_putchar('0');
 	_putchar('\n');
-	free(a), free(b), free(ans);
+	free(result);
 	return (0);
 }
