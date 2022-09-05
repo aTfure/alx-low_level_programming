@@ -1,13 +1,10 @@
-#include <unistd.h>
+#ifndef _OPERATIONS_H
+#define _OPERATIONS_H
 
-/**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c)
-{
-		return (write(1, &c, 1));
-}
+
+int add(int a, int b);
+int sub(int a, int b);
+int mul(int a, int b);
+int div(int a, int b);
+int mod(int a, int b);
+#endif
