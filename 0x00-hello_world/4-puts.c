@@ -1,7 +1,9 @@
 #include <stdio.h>
 
 /**
- * Using Function puts
+ * main - using function puts
+ *
+ * Return: Always 0 (Success)
  */
 
 int main(void)
