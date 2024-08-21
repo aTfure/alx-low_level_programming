@@ -10,7 +10,7 @@ int main(void)
 {
 	int two_two_digit, two_two_digit2;
 
-	two_two_digit = 10;
+	two_two_digit = 0;
 
 	while (two_two_digit <= 98)
 	{
