@@ -13,7 +13,7 @@ int main(void)
 
 	single_digit = 0;
 
-	while (single_digit <= 10)
+	while (single_digit < 10)
 	{
 		putchar(single_digit + '0');
 		single_digit++;
