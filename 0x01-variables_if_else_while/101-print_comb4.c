@@ -26,7 +26,7 @@ int main(void)
 			putchar(three_digit2 + '0');
 			putchar(three_digit3 + '0');
 
-			if (three_digit != 8 || three_digit != 9 || three_digit != 7)
+			if (three_digit != 7 || three_digit2 != 8 || three_digit3 != 9)
 			{
 				putchar(',');
 				putchar(' ');
