@@ -2,6 +2,8 @@
 #include <stdio.h>
 
 /**
+ * main - Entry point
+ *
  * _putchar - program that prints _putchar
  * followed by a new line
  *
