@@ -21,23 +21,23 @@ void times_table(void)
 		{
 			product = t * result;
 
+			if (result != 0)
+			{
+				_putchar(',');
+				_putchar(' ');
+			}
+
+			if (product < 10 && result != 0)
+			{
+				_putchar(' ');
+			}
+
 			if (product >= 10)
 			{
 				_putchar((product / 10) + '0');
 			}
 
-			else
-			{
-				_putchar(' ');
-			}
-
 			_putchar((product % 10) + '0');
-
-			if (result != 9)
-			{
-				_putchar(',');
-				_putchar(' ');
-			}
 		}
 
 		_putchar('\n');
