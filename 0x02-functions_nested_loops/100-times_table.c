@@ -28,12 +28,12 @@ void print_times_table(int n)
 				printf(", ");
 			}
 
-			if (product < 10)
+			if (product < 10 && j != 0)
 			{
 				printf("  %d", product);
 			}
 
-			else if (product < 100)
+			else if (product >= 10 && product < 100)
 			{
 				printf(" %d", product);
 			}
