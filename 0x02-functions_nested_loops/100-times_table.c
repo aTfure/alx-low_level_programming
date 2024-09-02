@@ -25,36 +25,24 @@ void print_times_table(int n)
 
 			if (j != 0)
 			{
-				_putchar(',');
-				_putchar(' ');
+				printf(", ");
 			}
 
-			if (product < 10 && j != 0)
+			if (product < 10)
 			{
-				_putchar(' ');
-				_putchar(' ');
-				_putchar(product + '0');
+				printf("  %d", product);
 			}
 
-			else if (product >= 10 && product < 100)
+			else if (product < 100)
 			{
-				_putchar(' ');
-				_putchar((product / 10) + '0');
-				_putchar((product % 10) + '0');
-			}
-
-			else if (product >= 100)
-			{
-				_putchar((product / 100) + '0');
-				_putchar(((product / 10) % 10) + '0');
-				_putchar((product % 10) + '0');
+				printf(" %d", product);
 			}
 
 			else
 			{
-				_putchar(product + '0');
+				printf("%d", product);
 			}
 		}
-		_putchar('\n');
+		printf("\n");
 	}
 }
