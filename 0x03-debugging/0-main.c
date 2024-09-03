@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * void positive_or_negative - test the positive_or_negative function with 0
+ * main - test the positive_or_negative function with 0
  *
- * Return: 0 Always(Success)
+ * Return: 0
  */
 
 int main(void)
