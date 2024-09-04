@@ -9,10 +9,10 @@
 
 int main(void)
 {
-	long num, largest_prime, i; 
-	
+	long num, largest_prime, i;
+
 	num = 612852475143;
-	
+
 	largest_prime = -1;
 
 	while (num % 2 == 0)
